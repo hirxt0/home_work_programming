@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Star Wars Films</title>
+    <style>
+        body { font-family: Arial; max-width: 1200px; margin: 0 auto; padding: 20px; }
+        .movie-card { border: 1px solid #ddd; padding: 20px; margin: 10px 0; border-radius: 8px; }
+        .movie-card:hover { background: #f5f5f5; }
+    </style>
+</head>
+<body>
+    <h1>Star Wars Films</h1>
+    
+    {% for movie in movies %}
+    <div class="movie-card">
+        <h2>
+            <a href="{% url 'tripshit:movie_detail' movie.id %}">
+                Episode {{ movie.episode_id }}: {{ movie.title }}
+            </a>
+        </h2>
+        <p><strong>Director:</strong> {{ movie.director }}</p>
+        <p><strong>Release Date:</strong> {{ movie.release_date }}</p>
+    </div>
+    {% empty %}
+    <p>No movies found.</p>
+    {% endfor %}
+    
+    <hr>
+    <a href="{% url 'tripshit:characters_list' %}">View Characters</a> |
+    <a href="{% url 'tripshit:starships_list' %}">View Starships</a>
+</body>
+</html>

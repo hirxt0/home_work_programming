@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ movie.title }}</title>
+    <style>
+        body { font-family: Arial; max-width: 1200px; margin: 0 auto; padding: 20px; }
+        .section { margin: 30px 0; }
+        .character-list, .starship-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; }
+        .item { border: 1px solid #ddd; padding: 10px; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <a href="{% url 'tripshit:movies_list' %}">← Back to Movies</a>
+    
+    <h1>Episode {{ movie.episode_id }}: {{ movie.title }}</h1>
+    <p><strong>Director:</strong> {{ movie.director }}</p>
+    <p><strong>Release Date:</strong> {{ movie.release_date }}</p>
+    
+    <div class="section">
+        <h2>Characters ({{ characters.count }})</h2>
+        <div class="character-list">
+            {% for character in characters %}
+            <div class="item">
+                <a href="{% url 'tripshit:character_detail' character.id %}">
+                    {{ character.name }}
+                </a>
+            </div>
+            {% empty %}
+            <p>No characters found.</p>
+            {% endfor %}
+        </div>
+    </div>
+    
+    <div class="section">
+        <h2>Starships ({{ starships.count }})</h2>
+        <div class="starship-list">
+            {% for starship in starships %}
+            <div class="item">
+                {{ starship.name }}
+            </div>
+            {% empty %}
+            <p>No starships found.</p>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
