@@ -1,0 +1,56 @@
+{% block title %}{{ starship.name }}{% endblock %}
+
+{% block content %}
+<div style="max-width: 700px; margin: 0 auto; padding: 20px; color: rgb(14, 8, 8); font-family: Arial;">
+
+    <a href="{% url 'tripshit:starships_list' %}" style="color: #bbb; text-decoration: none;">
+        ← Назад к кораблям
+    </a>
+
+    <h1 style="font-size: 32px; margin-top: 20px; font-weight: bold;">
+        {{ starship.name }}
+    </h1>
+
+    <div style="margin-top: 20px; font-size: 18px;">
+
+        <p><strong>Макс. скорость:</strong> {{ starship.max_atmosphering_speed|default:"неизвестно" }}</p>
+
+    </div>
+
+    <hr style="margin: 25px 0; border-color: #444;">
+
+    <h2 style="font-size: 24px;">Фильмы</h2>
+    {% if films %}
+        <ul style="margin-left: 20px;">
+            {% for film in films %}
+                <li>
+                    <a href="{% url 'tripshit:movie_detail' film.id %}" style="color: #0f0d04;">
+                        {{ film.title }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p style="color: #0a0a0a;">Нет данных</p>
+    {% endif %}
+
+    <hr style="margin: 25px 0; border-color: #444;">
+
+    <h2 style="font-size: 24px;">Персонажи, которые использовали корабль</h2>
+
+    {% if pilots %}
+        <ul style="margin-left: 20px;">
+            {% for person in pilots %}
+                <li style="margin-bottom: 6px;">
+                    <a href="{% url 'tripshit:character_detail' person.id %}" style="color: #0f0d04;">
+                        {{ person.name }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p style="color: #141414;">Нет данных</p>
+    {% endif %}
+
+</div>
+{% endblock %}

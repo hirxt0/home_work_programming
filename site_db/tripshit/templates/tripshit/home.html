@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Star Wars Database</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #000000 0%, #1a1a2e 100%);
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .header {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            padding: 20px 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        h1 {
+            text-align: center;
+            font-size: 3em;
+            color: #FFE81F;
+            text-shadow: 0 0 20px rgba(255, 232, 31, 0.5);
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #aaa;
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+        
+        .main-content {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+        
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            width: 100%;
+        }
+        
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(255, 232, 31, 0.3);
+            border-color: #FFE81F;
+        }
+        
+        .card-icon {
+            font-size: 4em;
+            margin-bottom: 20px;
+        }
+        
+        .card h2 {
+            font-size: 2em;
+            margin-bottom: 10px;
+            color: #FFE81F;
+        }
+        
+        .card-count {
+            font-size: 3em;
+            font-weight: bold;
+            color: #4ECDC4;
+            margin: 20px 0;
+        }
+        
+        .card-description {
+            color: #bbb;
+            font-size: 1em;
+        }
+        
+        .footer {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px 0;
+            text-align: center;
+            color: #888;
+            margin-top: auto;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+            
+            .cards-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1>⭐ STAR WARS DATABASE ⭐</h1>
+            <p class="subtitle">Explore the Galaxy Far, Far Away</p>
+        </div>
+    </header>
+    
+    <main class="main-content">
+        <div class="cards-container">
+            <a href="{% url 'tripshit:movies_list' %}" class="card">
+                <div class="card-icon">🎬</div>
+                <h2>Films</h2>
+                <div class="card-count">{{ movies_count }}</div>
+                <p class="card-description">Browse all Star Wars movies</p>
+            </a>
+            
+            <a href="{% url 'tripshit:characters_list' %}" class="card">
+                <div class="card-icon">👤</div>
+                <h2>Characters</h2>
+                <div class="card-count">{{ characters_count }}</div>
+                <p class="card-description">Meet heroes and villains</p>
+            </a>
+            
+            <a href="{% url 'tripshit:starships_list' %}" class="card">
+                <div class="card-icon">🚀</div>
+                <h2>Starships</h2>
+                <div class="card-count">{{ starships_count }}</div>
+                <p class="card-description">Discover iconic vessels</p>
+            </a>
+        </div>
+    </main>
+    
+    <footer class="footer">
+        <div class="container">
+            <p>Data from SWAPI | May the Force be with you</p>
+        </div>
+    </footer>
+</body>
+</html>

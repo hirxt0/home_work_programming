@@ -1,0 +1,55 @@
+{% block title %}{{ character.name }}{% endblock %}
+
+{% block content %}
+<div style="max-width: 700px; margin: 0 auto; padding: 20px; color: rgb(14, 8, 8); font-family: Arial;">
+    
+    <a href="{% url 'tripshit:characters_list' %}" style="color: #bbb; text-decoration: none;">
+        ← Назад к персонажам
+    </a>
+
+    <h1 style="font-size: 32px; margin-top: 20px; font-weight: bold;">
+        {{ character.name }}
+    </h1>
+
+    <div style="margin-top: 20px; font-size: 18px;">
+
+        <p><strong>Рост:</strong> {{ character.height|default:"неизвестно" }}</p>
+        <p><strong>Масса:</strong> {{ character.mass|default:"неизвестно" }}</p>
+        <p><strong>Год рождения:</strong> {{ character.birth_year|default:"неизвестно" }}</p>
+
+    </div>
+
+    <hr style="margin: 25px 0; border-color: #444;">
+
+    <h2 style="font-size: 24px;">Фильмы</h2>
+    {% if films %}
+        <ul style="margin-left: 20px;">
+            {% for film in films %}
+                <li>
+                    <a href="{% url 'tripshit:movie_detail' film.id %}" style="color: #0f0d04;">
+                        {{ film.title }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p style="color: #0a0a0a;">Нет данных</p>
+    {% endif %}
+
+    <hr style="margin: 25px 0; border-color: #444;">
+
+    <h2 style="font-size: 24px;">Корабли</h2>
+    {% if starships %}
+        <ul style="margin-left: 20px;">
+            {% for ship in starships %}
+                <li style="margin-bottom: 6px; color: #0a0a0a;">
+                    {{ ship.name }}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p style="color: #141414;">Нет данных</p>
+    {% endif %}
+
+</div>
+{% endblock %}
